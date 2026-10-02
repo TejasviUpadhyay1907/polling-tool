@@ -1,0 +1,42 @@
+# ── Node / Frontend ─────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# ── Go / Backend ─────────────────────────────────────────────────────────────
+backend/server.exe
+backend/server
+backend/*.exe
+backend/tmp/
+
+# ── Environment files (contain secrets) ─────────────────────────────────────
+.env
+backend/.env
+*.env.local
+
+# Keep .env.example (it's a template, not secrets)
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# ── OS / Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ── Docker ───────────────────────────────────────────────────────────────────
+# Keep docker-compose.yml (it's config, not secrets)
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+
+# ── Redis dump ───────────────────────────────────────────────────────────────
+dump.rdb
+C:/Redis/

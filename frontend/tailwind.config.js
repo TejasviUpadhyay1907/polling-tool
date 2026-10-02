@@ -1,0 +1,102 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  // We manage theme via .light class on <html> — NOT Tailwind darkMode
+  // (Tailwind dark: prefix still works if needed, but we use CSS vars)
+  theme: {
+    extend: {
+      colors: {
+        // ── All map to CSS variables — auto-switch on theme ──────────────
+        bg:            "var(--bg)",
+        surface:       "var(--surface)",
+        raised:        "var(--raised)",
+        hover:         "var(--hover)",
+        line:          "var(--line)",
+        "line-2":      "var(--line-2)",
+        ink:           "var(--ink)",
+        muted:         "var(--muted)",
+        subtle:        "var(--subtle)",
+        accent:        "var(--accent)",
+        "accent-2":    "var(--accent-2)",
+        "accent-ink":  "var(--accent-ink)",
+        "accent-soft": "var(--accent-soft)",
+        lime:          "var(--lime)",
+        success:       "var(--success)",
+        warning:       "var(--warning)",
+        "warning-bg":  "var(--warning-bg)",
+        error:         "var(--error)",
+        "error-bg":    "var(--error-bg)",
+        // Legacy aliases so existing JSX doesn't break
+        primary:         "var(--accent)",
+        "primary-2":     "var(--accent-2)",
+        "text-primary":  "var(--ink)",
+        "text-secondary":"var(--muted)",
+        border:          "var(--line)",
+        "border-2":      "var(--line-2)",
+        "surface-2":     "var(--raised)",
+        "surface-3":     "var(--hover)",
+      },
+      fontFamily: {
+        sans:    ['"DM Sans"', "system-ui", "sans-serif"],
+        display: ["Manrope",  "system-ui", "sans-serif"],
+        mono:    ["ui-monospace", "SFMono-Regular", "Consolas", "monospace"],
+      },
+      fontSize: {
+        "2xs": ["10px", { lineHeight: "1.5" }],
+        xs:    ["11px", { lineHeight: "1.6" }],
+        sm:    ["12px", { lineHeight: "1.7" }],
+        base:  ["14px", { lineHeight: "1.75" }],
+        md:    ["15px", { lineHeight: "1.6"  }],
+        lg:    ["17px", { lineHeight: "1.5"  }],
+        xl:    ["20px", { lineHeight: "1.4"  }],
+        "2xl": ["24px", { lineHeight: "1.3"  }],
+        "3xl": ["30px", { lineHeight: "1.2"  }],
+        "4xl": ["38px", { lineHeight: "1.1"  }],
+        "5xl": ["48px", { lineHeight: "1.05" }],
+      },
+      borderRadius: {
+        sm:    "6px",
+        DEFAULT:"9px",
+        md:    "10px",
+        lg:    "14px",
+        xl:    "18px",
+        "2xl": "22px",
+        "3xl": "28px",
+        full:  "9999px",
+      },
+      boxShadow: {
+        card:       "var(--shadow-card)",
+        float:      "var(--shadow-float)",
+        glow:       "0 0 0 3px var(--accent-soft)",
+        "glow-aqua":"0 0 0 3px var(--accent-soft)",
+        inner:      "inset 0 1px 2px rgba(0,0,0,.12)",
+      },
+      animation: {
+        pulseDot:   "pulseDot 2.2s ease-in-out infinite",
+        breathe:    "breathe 7s ease-in-out infinite",
+        floatUp:    "floatUp 7s ease-in-out infinite",
+        floatDown:  "floatDown 7s ease-in-out infinite",
+        reveal:     "reveal .5s ease-out both",
+        spin:       "spin .8s linear infinite",
+        transmit:   "transmit 2.4s linear infinite",
+      },
+      keyframes: {
+        pulseDot: {
+          "0%,100%": { opacity:"1",  transform:"scale(1)"   },
+          "50%":     { opacity:".4", transform:"scale(.85)" },
+        },
+        floatUp:   { "50%": { translate:"0 -14px" } },
+        floatDown: { "50%": { translate:"0  14px" } },
+        reveal: {
+          from: { opacity:"0", transform:"translateY(18px)" },
+          to:   { opacity:"1", transform:"translateY(0)"    },
+        },
+        transmit: {
+          from: { transform:"translateX(-100%)" },
+          to:   { transform:"translateX(430%)"  },
+        },
+      },
+    },
+  },
+  plugins: [],
+};
