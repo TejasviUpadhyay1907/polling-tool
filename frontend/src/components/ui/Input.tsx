@@ -1,12 +1,10 @@
 import { cn } from "../../utils/cn";
 
-export function Input({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
+export function Input({ className, style, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       className={cn(
         "w-full h-10 rounded-[9px] border px-3.5 text-[13px] transition-colors duration-150",
-        "placeholder:text-subtle",
-        "focus:outline-none focus:ring-2",
         "disabled:opacity-50 disabled:cursor-not-allowed",
         className
       )}
@@ -14,10 +12,13 @@ export function Input({ className, ...props }: React.InputHTMLAttributes<HTMLInp
         background: "var(--raised)",
         borderColor: "var(--line)",
         color: "var(--ink)",
+        caretColor: "var(--accent-2)",
+        ...style,
       }}
       onFocus={e => {
         e.currentTarget.style.borderColor = "var(--accent-2)";
-        e.currentTarget.style.boxShadow = "0 0 0 3px var(--accent-soft)";
+        e.currentTarget.style.boxShadow = "0 0 0 3px color-mix(in srgb, var(--accent-2) 20%, transparent)";
+        e.currentTarget.style.outline = "none";
       }}
       onBlur={e => {
         e.currentTarget.style.borderColor = "var(--line)";
@@ -28,13 +29,11 @@ export function Input({ className, ...props }: React.InputHTMLAttributes<HTMLInp
   );
 }
 
-export function Textarea({ className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export function Textarea({ className, style, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <textarea
       className={cn(
         "w-full rounded-[9px] border px-3.5 py-3 text-[13px] transition-colors duration-150",
-        "placeholder:text-subtle",
-        "focus:outline-none",
         "disabled:opacity-50 resize-none",
         className
       )}
@@ -42,10 +41,13 @@ export function Textarea({ className, ...props }: React.TextareaHTMLAttributes<H
         background: "var(--raised)",
         borderColor: "var(--line)",
         color: "var(--ink)",
+        caretColor: "var(--accent-2)",
+        ...style,
       }}
       onFocus={e => {
         e.currentTarget.style.borderColor = "var(--accent-2)";
-        e.currentTarget.style.boxShadow = "0 0 0 3px var(--accent-soft)";
+        e.currentTarget.style.boxShadow = "0 0 0 3px color-mix(in srgb, var(--accent-2) 20%, transparent)";
+        e.currentTarget.style.outline = "none";
       }}
       onBlur={e => {
         e.currentTarget.style.borderColor = "var(--line)";
@@ -56,11 +58,11 @@ export function Textarea({ className, ...props }: React.TextareaHTMLAttributes<H
   );
 }
 
-export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
+export function Label({ className, style, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
   return (
     <label
       className={cn("text-[11px] font-700 tracking-[1.6px] uppercase", className)}
-      style={{ color: "var(--muted)" }}
+      style={{ color: "var(--muted)", ...style }}
       {...props}
     />
   );
