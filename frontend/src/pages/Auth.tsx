@@ -436,7 +436,6 @@ export function AuthPage({ initialMode }: { initialMode: Mode }) {
   };
 
   // direction: +1 = signup sliding in from right, -1 = login sliding in from left
-  const direction = mode === "signup" ? 1 : -1;
 
   return (
     <div style={{
