@@ -67,7 +67,19 @@ export async function deletePoll(id: string): Promise<void> {
 }
 
 export async function votePoll(id: string, optionId: string): Promise<{ poll: Poll; results?: PollResults }> {
-  const { data } = await api.post(`/polls/${id}/vote`, { optionId, option_id: optionId });
+  // Get or generate a persistent browser voter ID
+  // Incognito = fresh localStorage = new ID = treated as different voter
+  let voterId = localStorage.getItem("pulsep_voter_id");
+  if (!voterId) {
+    voterId = crypto.randomUUID();
+    localStorage.setItem("pulsep_voter_id", voterId);
+  }
+
+  const { data } = await api.post(`/polls/${id}/vote`, {
+    optionId,
+    option_id: optionId,
+    voterId,
+  });
   const raw = unwrap<Record<string, unknown>>(data);
   if (raw && typeof raw === "object" && "poll" in raw) {
     return {

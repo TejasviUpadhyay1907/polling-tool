@@ -29,6 +29,7 @@ func NewVoteHandler(polls *mongo.Collection, svc *services.PollService) *VoteHan
 
 type voteReq struct {
 	OptionID string `json:"optionId"`
+	VoterID  string `json:"voterId"` // browser-generated UUID from localStorage
 }
 
 func (h *VoteHandler) Vote(c *gin.Context) {
@@ -49,8 +50,15 @@ func (h *VoteHandler) Vote(c *gin.Context) {
 		return
 	}
 
-	// Build voter fingerprint — IP + User-Agent (simple, no user account required)
-	fingerprint := c.ClientIP() + "|" + c.GetHeader("User-Agent")
+	// Build fingerprint:
+	// - If browser sent a voterId (localStorage UUID), use it — incognito gets a fresh UUID
+	// - Fall back to IP + User-Agent if no voterId sent (e.g. API clients)
+	var fingerprint string
+	if strings.TrimSpace(req.VoterID) != "" {
+		fingerprint = "vid:" + strings.TrimSpace(req.VoterID)
+	} else {
+		fingerprint = c.ClientIP() + "|" + c.GetHeader("User-Agent")
+	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
